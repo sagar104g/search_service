@@ -1,0 +1,17 @@
+_id - string [12 bytes, Mongo default index]
+product_id - string [16 bytes, uuid]
+affiliated - boolean
+name - string [256 bytes]
+price - number [8 bytes]
+currency - enum (rupee, dollar, pound, etc.)
+default_image - string [256 bytes]
+default_link - string [256 bytes]
+default_referrer - string [64 bytes]
+brand_name - string [32 bytes]
+category - CATEGORY
+sub_category - CATEGORY
+further_sub_category - string [64 bytes]
+sellers: SELLER[]
+active: boolean
+product_video_info: STREAMERVIDEOINFO[]
+coupons: [DEPENDS UPON REFERRER'S APIs]

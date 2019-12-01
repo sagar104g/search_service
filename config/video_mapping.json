@@ -1,0 +1,19 @@
+_id - string [12 bytes, Mongo default index]
+video_id - string [16 bytes, uuid]
+streamer_id - string [16 bytes, (Ref: USER:user_id)]
+description - string [256 bytes]
+hashtags - string[]
+show_user_intro - boolean
+products - string[]
+start_timestamp - number [8 bytes]
+end_timestamp - number [8 bytes]
+current_viewers - number [8 bytes] (can be retrieved from cache/broker)
+total_live_views - number [8 bytes]
+total_views - number [8 bytes]
+live - boolean
+chat_messages - []CHATMESSAGE
+likes – number [8 bytes]
+stream_link - string[256 bytes]
+video_url - string [256 bytes]
+language - enum (hindi, english, marathi, etc.)
+thumbnail_link: string [256 bytes]

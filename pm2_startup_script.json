@@ -1,0 +1,15 @@
+{
+    "apps": [
+      {
+        "name": "search-services",
+        "script": "/home/sagar/Desktop/search_services/app.js",
+        "exec_mode": "cluster",
+        "instances": 2,
+        "node_args": "--max_old_space_size=4192",
+        "watch": ["app.js"],
+        "ignore_watch" : ["node_modules", "config"],
+        "watch_delay": 5000,
+        "max_memory_restart": "100M"
+      }
+    ]
+  }
