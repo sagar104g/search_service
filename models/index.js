@@ -31,7 +31,13 @@ var insertIndex = function (id, collectionName, cb){
 exports.insertIndex = insertIndex;
 
 var getIndex = function (id, indexName, cb){
-    var queryObjArray = [{"_id" : [id]}]
+    var queryObjArray = {
+        "query" : {
+            "terms" : {
+                        "_id" : [id]
+                      }
+        }
+    }
     elasticsearch.searchData(indexName, queryObjArray, function(err, result){
         if(err){
             cb(err)

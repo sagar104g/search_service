@@ -3,7 +3,12 @@ var config =  require('../config/config')
 var fs = require('fs')
 var path = require('path')
 
-const elasticsearchClient = new elasticsearch.Client({ node: 'http://localhost:9200' })
+const elasticsearchClient = new elasticsearch.Client({ 
+    nodes: ['http://localhost:9200'],
+    maxRetries: 5,
+    requestTimeout: 60000,
+    sniffOnStart: true
+    })
 
 function indiceSetup(cb){
     var indices = config.indices;
@@ -266,12 +271,8 @@ function setMapping(indexName, mapping, cb){
 }
 exports.setMapping = setMapping;
 
-function searchData(indexName, searchObject, cb){
+function searchData(indexName, searchQuery, cb){
 
-    var searchQuery = {"query" : {"bool" : {"should" : []}}}
-    for(var termObj in searchObject){
-        searchQuery.query.bool.should.push({"terms" : searchObject[termObj]})
-    }
     elasticsearchClient.search({
         index: indexName,
         body: searchQuery
