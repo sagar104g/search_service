@@ -24,25 +24,19 @@
         }
     ],
     "properties": {
-		"product_id": {
+		"user_id": {
 			"type": "keyword"
 		},
-		"name": {
+		"username": {
 			"type": "keyword"
 		},
-		"price": {
-			"type": "integer"
-		},
-		"currency": {
+		"first_name": {
 			"type": "keyword"
 		},
-		"default_image":{
+		"profile_pic_link": {
 			"type": "keyword"
-        },
-        "brand_name":{
-			"type": "keyword"
-        },
-        "active":{
+		},
+		"active":{
 			"type": "boolean"
 		}
 	}

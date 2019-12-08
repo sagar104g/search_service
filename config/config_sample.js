@@ -4,9 +4,7 @@ var config = {
 		database: ''
 	},
 	elasticsearch: {
-		protocol: 'https',
-		host    : 'localhost',
-		port    : '9200'
+		connectionString : 'http://localhost:9200'
 	},
 	indices: {
 		"test":{

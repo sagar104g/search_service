@@ -4,28 +4,30 @@ var fs = require('fs')
 var path = require('path')
 
 const elasticsearchClient = new elasticsearch.Client({ 
-    nodes: ['http://localhost:9200'],
+    nodes: [config.elasticsearch.connectionString],
     maxRetries: 5,
     requestTimeout: 60000,
     sniffOnStart: true
     })
 
-function indiceSetup(cb){
+function indexSetup(cb){
     var indices = config.indices;
     for(var indice in indices){
         indexCreater(indices[indice].indexName, indices[indice].aliasName, function(err, result){
             if(err){
                 console.log(err)
+                cb(err)
             }else{
                 console.log(result)
+                cb(null, result)
             }
         })
     }
 }
-exports.indiceSetup = indiceSetup
+exports.indexSetup = indexSetup
 
 var indexCreater = function(indexName, aliasName){
-    checkIndice(indexName, function(err, result){
+    checkIndex(indexName, function(err, result){
         if(err){
             cb(err)
         }else{
@@ -39,19 +41,32 @@ var indexCreater = function(indexName, aliasName){
                             if(err){
                                 cb(err)
                             }else{
-                                checkAlias(indexName, aliasName, function(err, result){
+                                var fileName = '../config/'+indexName+'_mapping.json';
+                                fs.readFile(path.join(__dirname, fileName), 'utf8',function(err, mapping){
                                     if(err){
                                         cb(err)
                                     }else{
-                                        if(!result){
-                                            setAlias(indexName, aliasName, function(err){
-                                                if(err){
-                                                    cb(err)
-                                                }else{
-                                                    fillIndice(indexName);
-                                                }
-                                            })
-                                        }
+                                        setMapping(indexName, mapping, function(err, result){
+                                            if(err){
+                                                cb(err)
+                                            }else{
+                                                checkAlias(indexName, aliasName, function(err, result){
+                                                    if(err){
+                                                        cb(err)
+                                                    }else{
+                                                        if(!result){
+                                                            setAlias(indexName, aliasName, function(err){
+                                                                if(err){
+                                                                    cb(err)
+                                                                }else{
+                                                                    fillIndice(indexName);
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        })
                                     }
                                 })
                             }
@@ -184,7 +199,7 @@ function getDocumentById(indexName, documentId){
 }
 exports.getDocumentById = getDocumentById;
 
-function checkIndice(indexName, cb){
+function checkIndex(indexName, cb){
 
     elasticsearchClient.indices.exists({
         index: indexName
@@ -201,7 +216,7 @@ function checkIndice(indexName, cb){
     })
 
 }
-exports.checkIndice = checkIndice;
+exports.checkIndex = checkIndex;
 
 function checkAlias(indexName, aliasName, cb){
 

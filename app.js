@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
 app.use(bodyParser.json())
-elasticSearch.indiceSetup(function(err, res){
+elasticSearch.indexSetup(function(err, res){
   if(err){
     console.log(err)
   }else{
