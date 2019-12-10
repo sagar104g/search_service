@@ -28,10 +28,22 @@
 			"type": "keyword"
 		},
 		"username": {
-			"type": "keyword"
+			"type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "standard",
+            "fielddata": true
 		},
 		"first_name": {
-			"type": "keyword"
+			"type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "standard",
+            "fielddata": true
+        },
+        "last_name": {
+			"type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "standard",
+            "fielddata": true
 		},
 		"profile_pic_link": {
 			"type": "keyword"

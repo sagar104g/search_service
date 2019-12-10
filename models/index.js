@@ -1,12 +1,27 @@
-var elasticsearch = require('../services/elasticSearch')
-var mongoService = require('../services/mongo')
-
+var elasticsearch = require('../services/elasticSearch');
+var mongoService = require('../services/mongo');
+var ObjectId = require('mongodb').ObjectID;
 var insertIndex = function (id, collectionName, cb){
+    if(typeof(id) == 'string' && ObjectId.isValid()){
+        id  = new ObjectId(id)
+    }
+
+    if(collectionName == 'video'){
+        projection = {"projection": {"video_id": 1, "hashtags": 1, "live": 1, "thumbnail_link": 1}}
+    }else{
+        if(collectionName == 'product'){
+            projection = {"projection": {"product_id": 1, "name": 1, "price": 1, "currency": 1, "default_image": 1, "brand_name": 1, "active": 1}}
+        }else{
+            if(collectionName == 'user'){
+                projection = {"projection": {"user_id": 1, "username": 1, "first_name": 1, "last_name": 1, "profile_pic_link": 1, "active": 1}}
+            }
+        }
+    }
     var db = mongoService.getMongoConnection('fu-test-db')
     var query = {_id: id}
     db.collection(collectionName).findOne({
         $and:[query]
-    }, function(err, doc){
+    },projection, function(err, doc){
         if(err){
             console.log(err)
             cb(err)
@@ -33,12 +48,12 @@ exports.insertIndex = insertIndex;
 var getIndex = function (id, indexName, cb){
     var queryObjArray = {
         "query" : {
-            "terms" : {
-                        "_id" : [id]
+            "term" : {
+                        "_id" : id
                       }
         }
     }
-    elasticsearch.searchData(indexName, queryObjArray, function(err, result){
+    elasticsearch.searchData(indexName, queryObjArray, null, null, function(err, result){
         if(err){
             cb(err)
         }else{

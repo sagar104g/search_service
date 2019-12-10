@@ -40,7 +40,6 @@ router.post('/:index/all', function(req, res){
 
 router.post('/:index/:id', function(req, res){
     if(config.indices[req.params.index]){
-        var id = ObjectId(req.params.id)
         index.insertIndex(id, req.params.index, function(err, result){
             if(err){
                 res.status(404)

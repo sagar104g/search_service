@@ -3,13 +3,31 @@
 		"number_of_shards" : 5,
         "number_of_replicas" : 1,
         "refresh_interval" : "1s",
-		"analysis": {
-			"analyzer": {
-                "my_english_analyzer": {
-                  "type": "standard",
-                  "max_token_length": 400
-                }
+        "analysis": {
+          "filter": {
+            "autocomplete_filter": {
+              "type": "edge_ngram",
+              "min_gram": 2,
+              "max_gram": 20
             }
-		}
+          },
+          "analyzer": {
+            "autocomplete": {
+              "type": "custom",
+              "tokenizer": "standard",
+              "filter": [
+                "lowercase",
+                "autocomplete_filter"
+              ]
+            },
+            "fullText": {
+              "type": "custom",
+              "tokenizer": "keyword",
+              "filter": [
+                "lowercase"
+              ]
+            }
+          }
+        }
 	}
 }

@@ -28,7 +28,10 @@
 			"type": "keyword"
 		},
 		"hashtags": {
-			"type": "keyword"
+			"type": "text",
+            "analyzer": "autocomplete",
+            "search_analyzer": "standard",
+            "fielddata": true
 		},
 		"live": {
 			"type": "boolean"

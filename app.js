@@ -23,7 +23,10 @@ elasticSearch.indexSetup(function(err, res){
 
 app.use('/search', search)
 app.use('/index', index)
-
+app.get('/status', function(req, res){
+  req.status(200)
+  res.send({"status":"ok"})
+})
 
 mongoPromise.mongoConnectionPool().then( function(){
     var watcher = require('./services/mongoWatcher')

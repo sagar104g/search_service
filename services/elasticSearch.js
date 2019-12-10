@@ -92,6 +92,7 @@ exports.fillIndice = fillIndice
 function addDocument(indexName ,document, cb){
     var docId = document._id;
     delete document._id
+    document.active = document.active == 1 ? true : (document.active == true ? true : false)
     elasticsearchClient.index({
         id: docId,
         index: indexName,
@@ -286,11 +287,16 @@ function setMapping(indexName, mapping, cb){
 }
 exports.setMapping = setMapping;
 
-function searchData(indexName, searchQuery, cb){
-
+function searchData(indexName, searchQuery, size, from, cb){
+    size = size ? (size > 10 ? 10 : size) : 10
+    from = from || 0
+    // scroll option for smooth scrolling and eficient also
     elasticsearchClient.search({
         index: indexName,
-        body: searchQuery
+        body: searchQuery,
+        size: size,
+        from: from,
+        search_type: 'query_then_fetch'
       }, function(err, result){
         if(err){
             cb(err)
