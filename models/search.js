@@ -5,7 +5,7 @@ var searchQueryBuilder = function(indexName, queryValue, from, size, cb){
     var query = {}
     if(indexName == "all"){
         indexName = '_all';
-        query = {"query": {"multi_match" : {"query": queryValue, "fields": [ "name", "price", "brand_name", "username", "*_name", "hashtags"] }}}
+        query = {"query": {"multi_match" : {"query": queryValue, "fields": [ "name", "brand_name", "username", "first_name", "last_name", "hashtags"] }}}
     }else{
         if(indexName == 'video'){
             query = {"query": {"match" : {"hashtags": queryValue }}}

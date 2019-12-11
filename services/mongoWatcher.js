@@ -43,7 +43,7 @@ function mongoToEs(doc){
                         if(err){
                             console.log(err)
                         }else{
-                            console.log("doc indexed")
+                            console.log("doc deleted")
                         } 
                     })
                 break;

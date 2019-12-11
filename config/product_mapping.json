@@ -30,8 +30,7 @@
 		"name": {
 			"type": "text",
             "analyzer": "autocomplete",
-            "search_analyzer": "standard",
-            "fielddata": true
+            "search_analyzer": "standard"
 		},
 		"price": {
 			"type": "integer"
@@ -45,8 +44,7 @@
         "brand_name":{
 			"type": "text",
             "analyzer": "autocomplete",
-            "search_analyzer": "standard",
-            "fielddata": true
+            "search_analyzer": "standard"
         },
         "active":{
 			"type": "boolean"

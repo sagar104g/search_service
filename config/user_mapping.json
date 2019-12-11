@@ -30,20 +30,17 @@
 		"username": {
 			"type": "text",
             "analyzer": "autocomplete",
-            "search_analyzer": "standard",
-            "fielddata": true
+            "search_analyzer": "standard"
 		},
 		"first_name": {
 			"type": "text",
             "analyzer": "autocomplete",
-            "search_analyzer": "standard",
-            "fielddata": true
+            "search_analyzer": "standard"
         },
         "last_name": {
 			"type": "text",
             "analyzer": "autocomplete",
-            "search_analyzer": "standard",
-            "fielddata": true
+            "search_analyzer": "standard"
 		},
 		"profile_pic_link": {
 			"type": "keyword"
