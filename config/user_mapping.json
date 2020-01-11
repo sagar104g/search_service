@@ -4,7 +4,7 @@
             "integers": {
                 "match_mapping_type": "long",
                 "mapping": {
-                "type": "integer"
+                    "type": "integer"
                 }
             }
         },
@@ -15,8 +15,8 @@
                     "type": "text",
                     "fields": {
                         "raw": {
-                        "type":  "keyword",
-                        "ignore_above": 256
+                            "type": "keyword",
+                            "ignore_above": 256
                         }
                     }
                 }
@@ -24,29 +24,29 @@
         }
     ],
     "properties": {
-		"user_id": {
-			"type": "keyword"
-		},
-		"username": {
-			"type": "text",
+        "user_id": {
+            "type": "keyword"
+        },
+        "username": {
+            "type": "text",
             "analyzer": "autocomplete",
             "search_analyzer": "standard"
-		},
-		"first_name": {
-			"type": "text",
+        },
+        "first_name": {
+            "type": "text",
             "analyzer": "autocomplete",
             "search_analyzer": "standard"
         },
         "last_name": {
-			"type": "text",
+            "type": "text",
             "analyzer": "autocomplete",
             "search_analyzer": "standard"
-		},
-		"profile_pic_link": {
-			"type": "keyword"
-		},
-		"active":{
-			"type": "boolean"
-		}
-	}
+        },
+        "profile_pic_link": {
+            "type": "keyword"
+        },
+        "active": {
+            "type": "boolean"
+        }
+    }
 }

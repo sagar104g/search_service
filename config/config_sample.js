@@ -1,29 +1,38 @@
 var config = {
-	mongo: {
-		connectionString: 'mongodb://localhost/<DB-NAME>',
-		database: ''
+	"mongo_fu-test-db": {
+		starter: 'mongodb',
+		username: 'test1',
+		password: 'try1',
+		hosts: 'localhost',
+		replicaSet: 'fu_test',
+		database: 'fu-test-db'
 	},
-	elasticsearch: {
-		connectionString : 'http://localhost:9200'
-	},
+	elasticsearch: [{
+		protocol: 'http',
+		host: 'localhost',
+		port: '9200'
+	}],
 	indices: {
-		"test":{
-		indexName: "test",
-		aliasName: "testAlias"
+		"test": {
+			indexName: "test",
+			aliasName: "testAlias"
+		},
+		"user": {
+			indexName: "user",
+			aliasName: "userAlias"
+		},
+		"product": {
+			indexName: "product",
+			aliasName: "productAlias"
+		},
+		"video": {
+			indexName: "video",
+			aliasName: "videoAlias"
+		}
 	},
-		"user":{
-		indexName: "user",
-		aliasName: "userAlias"
-	},
-		"product":{
-		indexName: "product",
-		aliasName: "productAlias"
-	},
-		"video":{
-		indexName: "video",
-		aliasName: "videoAlias"
-	}},
-    SENTRY_DSN: 'https://005b49f9aa8945b29d3938a0e4ed70b2@sentry.io/1813560'
+	MAIN_DB: "fu-test-db",
+	AUTH_BASE_URL: 'http://localhost:4000',
+	SENTRY_DSN: 'https://005b49f9aa8945b29d3938a0e4ed70b2@sentry.io/1813560'
 };
 
 module.exports = config;

@@ -4,7 +4,7 @@
             "integers": {
                 "match_mapping_type": "long",
                 "mapping": {
-                "type": "integer"
+                    "type": "integer"
                 }
             }
         },
@@ -15,8 +15,8 @@
                     "type": "text",
                     "fields": {
                         "raw": {
-                        "type":  "keyword",
-                        "ignore_above": 256
+                            "type": "keyword",
+                            "ignore_above": 256
                         }
                     }
                 }
@@ -24,19 +24,19 @@
         }
     ],
     "properties": {
-		"video_id": {
-			"type": "keyword"
-		},
-		"hashtags": {
-			"type": "text",
+        "video_id": {
+            "type": "keyword"
+        },
+        "hashtags": {
+            "type": "text",
             "analyzer": "autocomplete",
             "search_analyzer": "standard"
-		},
-		"live": {
-			"type": "boolean"
-		},
-		"thumbnail_link": {
-			"type": "keyword"
-		}
-	}
+        },
+        "live": {
+            "type": "boolean"
+        },
+        "thumbnail_link": {
+            "type": "keyword"
+        }
+    }
 }
